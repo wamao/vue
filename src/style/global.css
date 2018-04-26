@@ -1,0 +1,143 @@
+@charset "UTF-8";
+blockquote,body,button,dd,dl,dt,fieldset,form,h1,h2,h3,h4,h5,h6,hr,input,legend,li,ol,p,pre,td,textarea,th,ul,menu,section,header,article,footer{margin:0;padding:0}
+h1,h2,h3,h4,h5,h6{font-size:100%}
+address,cite,dfn,em,var{font-style:normal}
+code,kbd,pre,samp{font-family:courier new,courier,monospace}
+small{font-size:12px}
+ol,ul{list-style:none}
+a{text-decoration:none}
+sup{vertical-align:text-top}
+sub{vertical-align:text-bottom}
+legend{color:#000}
+fieldset,img{border:0}
+button,input,select,textarea{font-size:100%}
+table{border-collapse:collapse;border-spacing:0}
+html { width: 100%; font-size: 10px; color: #555; font-family: "microsoft yahei"; }
+body{ font-family: "microsoft yahei"; font-size:1.4rem;}
+
+
+
+
+
+
+@font-face {
+  font-family: 'iconfont';  /* project id 630680 */
+  src: url('http://at.alicdn.com/t/font_630680_wnsw4zclczhncdi.eot');
+  src: url('http://at.alicdn.com/t/font_630680_wnsw4zclczhncdi.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_630680_wnsw4zclczhncdi.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_630680_wnsw4zclczhncdi.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_630680_wnsw4zclczhncdi.svg#iconfont') format('svg');
+}
+
+
+
+  .iconfont {
+    font-family:"iconfont" !important;
+    font-size:18px;
+    font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+/*msg 提示*/ 
+.lw_Errmsg{
+  width:50%;
+  padding:10px;
+  background-color: #fddcdc;
+  border-color:1px solid #fde2e2;
+  position:fixed;
+  bottom: 80px;
+  left:50%;
+  text-align: center;
+  color:#f01515;
+  border-radius: 5px;
+  overflow: hidden;
+  transform: translate(-50%,0%);
+  animation: myfirst 2.5s;
+  -moz-animation: myfirst 2.5s;	/* Firefox */
+  -webkit-animation: myfirst 2.5s;	/* Safari 和 Chrome */
+  -o-animation: myfirst 2.5s;	/* Opera */
+}
+
+/*msg 提示*/ 
+.lw_toast{
+  width:50%;
+  padding:10px;
+  background-color: #333333;
+  border-color:1px solid #333333;
+  position:fixed;
+  bottom: 80px;
+  left:50%;
+  text-align: center;
+  color:#ffffff;
+  border-radius: 5px;
+  overflow: hidden;
+  transform: translate(-50%,0%);
+  animation: myfirst 2.5s;
+  -moz-animation: myfirst 2.5s;	/* Firefox */
+  -webkit-animation: myfirst 2.5s;	/* Safari 和 Chrome */
+  -o-animation: myfirst 2.5s;	/* Opera */
+}
+
+
+@keyframes myfirst
+{
+  0%   {opacity:1;}
+  10%  {opacity:0.9;}
+  20%  {opacity: 0.8;}
+  30%  {opacity: 0.7;}
+  40%  {opacity: 0.6;}
+  50%  {opacity: 0.5;}
+  60%  {opacity:0.4;}
+  70%  {opacity: 0.3;}
+  80%  {opacity:0.2;}
+  90%  {opacity: 0.1;}
+  100% {opacity:0;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+  0%   {opacity:1;}
+  10%  {opacity:0.9;}
+  20%  {opacity: 0.8;}
+  30%  {opacity: 0.7;}
+  40%  {opacity: 0.6;}
+  50%  {opacity: 0.5;}
+  60%  {opacity:0.4;}
+  70%  {opacity: 0.3;}
+  80%  {opacity:0.2;}
+  90%  {opacity: 0.1;}
+  100% {opacity:0;}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+  0%   {opacity:1;}
+  10%  {opacity:0.9;}
+  20%  {opacity: 0.8;}
+  30%  {opacity: 0.7;}
+  40%  {opacity: 0.6;}
+  50%  {opacity: 0.5;}
+  60%  {opacity:0.4;}
+  70%  {opacity: 0.3;}
+  80%  {opacity:0.2;}
+  90%  {opacity: 0.1;}
+  100% {opacity:0;}
+}
+@-o-keyframes myfirst /* Opera */
+{
+  0%   {opacity:1;}
+  10%  {opacity:0.9;}
+  20%  {opacity: 0.8;}
+  30%  {opacity: 0.7;}
+  40%  {opacity: 0.6;}
+  50%  {opacity: 0.5;}
+  60%  {opacity:0.4;}
+  70%  {opacity: 0.3;}
+  80%  {opacity:0.2;}
+  90%  {opacity: 0.1;}
+  100% {opacity:0;}
+}
+
