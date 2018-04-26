@@ -18,6 +18,35 @@
         <wc-slide><img src="../../assets/img/imgcover08.png"/></wc-slide>
       </wc-swiper>
    </div>
+   <div class="ad">
+     <span><i class="iconfont"> &#xe657;</i>自营品牌</span>
+     <span><i class="iconfont"> &#xe657;</i>30天无忧退货</span>
+     <span><i class="iconfont"> &#xe657;</i>48小时快速退款</span>
+   </div>
+   
+   <div class="juan_content">
+      <div class="juan">
+         <p>- 领券中心 -</p>
+         <dl>
+           <dt><img src="../../assets/img/juan1.jpg"/></dt>
+           <dd>
+              <p>满300减40</p>
+              <p>马上去领取></p>
+           </dd>
+         </dl>
+      </div>
+      <div class="zhekou">
+        <p>- 今日折扣 -</p>
+        <img src="../../assets/img/zhekou6.jpg"/>
+      </div>
+   </div>
+    <div class="time">
+     
+      <img src="../../assets/img/zhekou6.jpg"/>
+      <div class="">
+
+      </div>
+   </div>
   <div class="home_list" >
      <p class="header_title">新品推荐</p>
       <ul>
@@ -181,6 +210,56 @@ export default {
          }
       }
     }
+ }
+ .ad{
+   display: flex;
+   justify-content: space-around;
+   height:40px;
+   align-items: center;
+   span{
+     font-size: 12px;
+     i{
+       vertical-align: top;
+       margin-right:2px;     
+     }
+   }
+ }
+ .juan_content{
+   display: flex;
+   .zhekou{
+     width:120px;
+     background: #dfe2e2;
+     margin-left: 5px;
+     p{font-size: 12px;padding:5px 0px;}
+     img{
+       width:80px;
+       height:80px;
+     }
+   }
+   .juan{
+     flex: 1;
+     display: flex;
+     background: #f5f5f5;
+     flex-direction: column;
+     p{font-size: 12px;padding:5px 0px;}
+     dl{
+      
+       align-items: center;
+       display: flex;
+       
+       dt{
+         padding:0px 15px;
+         box-sizing: border-box;
+         img{width:80px;height:80px}
+       }
+       dd{
+         p:nth-child(1){
+           font-weight: 600;
+           font-size: 16px;
+         }
+       }
+     }
+   }
  }
  }
 </style>
