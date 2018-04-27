@@ -13,13 +13,13 @@
      </div>
      <div>
       <ul>
-        <li v-on:click="pushPage(0)" >
+        <router-link tag="li" to="/Mine">
            <div>
                <i class="iconfont"> &#xe618;</i>
                 <span>我的订单</span>
                <i class="iconfont"> &#xe731;</i>
            </div>
-        </li>
+       </router-link>
          <li v-on:click="pushPage(1)" >
            <div>
                <i class="iconfont"  style="font-size:20px;" > &#xe7ce;</i>
@@ -27,14 +27,21 @@
                <i class="iconfont"> &#xe731;</i>
            </div>
         </li>
-         <li v-on:click="pushPage(2)" >
+       <router-link tag="li" to="/Coupon">
+           <div>
+              <i class="iconfont"> &#xe624;</i>
+                <span>我的优惠券</span>
+             <i class="iconfont"> &#xe731;</i>
+           </div>
+        </router-link>
+         <router-link tag="li" to="/Collection">  
            <div>
                <i class="iconfont"> &#xe715;</i>
                 <span>地址管理</span>
-               <i class="iconfont"> &#xe731;</i>
+              <i class="iconfont"> &#xe731;</i>
            </div>
-        </li>
-        <li v-on:click="pushPage(3)" >
+       </router-link>
+        <li v-on:click="pushPage(3)" >  
            <div>
                <i class="iconfont"> &#xe60e;</i>
                 <span>联系客服</span>
@@ -47,13 +54,14 @@
      
      
      </div>
+        <router-view></router-view>
      <Tab Index=4></Tab>
   </div>
 </template>
 
 <script>
  import BScroll from 'better-scroll';
- import Tab from './Tab';
+ import Tab from '../Tab/Tab';
 export default {
   name: 'Cart',
   components:{Tab},

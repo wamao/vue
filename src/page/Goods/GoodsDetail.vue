@@ -64,7 +64,7 @@ name: 'Detail',
     /*加入购物车*/
     addCart(){
       let req={
-        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ2MTc1OTksImV4cCI6MTUyNDcwMzk5OX0.AMT7KVck4GpidxGYBRJWhvpzonU_XTROkyYbmfrZS68",
+        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4MDgzOTYsImV4cCI6MTUyNDg5NDc5Nn0.85nBqaz9r64E_iTBliF3C6V2YBuRYZlCMEnOFt3k5uA",
         goodsId:this.$route.params.goodsId,
         goodsNumber:1,
         goodsSize:'2018纪念版',

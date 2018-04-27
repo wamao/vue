@@ -96,7 +96,7 @@ export default {
     getCart(){
      
       let req={
-        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ2MTc1OTksImV4cCI6MTUyNDcwMzk5OX0.AMT7KVck4GpidxGYBRJWhvpzonU_XTROkyYbmfrZS68",
+        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4MDgzOTYsImV4cCI6MTUyNDg5NDc5Nn0.85nBqaz9r64E_iTBliF3C6V2YBuRYZlCMEnOFt3k5uA",
        
       }
       axios.post("/getCart",req).then((res)=>{

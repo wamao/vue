@@ -35,7 +35,16 @@ module.exports = {
 
       '/delCart':{
         target:'http://localhost:3000', // 设置代理目标
-      } 
+      } ,
+      '/addCoupon':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+      '/couponList':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+      
+
+      
       
      
       
