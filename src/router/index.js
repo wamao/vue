@@ -13,6 +13,7 @@ import GoodsDetail from  '../page/Goods/GoodsDetail'; //商品详情
 import Order from '../page/Order/Order'; // 订单页面
 import Coupon from  '../page/Mine/Coupon'; // 优惠券
 import Collection from  '../page/Mine/Collection' // 收藏
+import Addaddress from '../page/Address/Addaddress';
 Vue.use(Router);
 
 export default new Router({
@@ -71,6 +72,12 @@ export default new Router({
       path:'/Collection',
       name:'Collection',
       component:Collection
+    },
+    {
+      path:'/Addaddress',
+      name:'Addaddress',
+      component:Addaddress
     }
+    
   ]
 })

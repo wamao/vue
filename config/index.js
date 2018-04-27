@@ -42,7 +42,10 @@ module.exports = {
       '/couponList':{
         target:'http://localhost:3000', // 设置代理目标
       },
-      
+      '/addAddress':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+     
 
       
       

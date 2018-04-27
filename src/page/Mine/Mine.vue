@@ -34,7 +34,7 @@
              <i class="iconfont"> &#xe731;</i>
            </div>
         </router-link>
-         <router-link tag="li" to="/Collection">  
+         <router-link tag="li" to="/Addaddress">  
            <div>
                <i class="iconfont"> &#xe715;</i>
                 <span>地址管理</span>
