@@ -32,8 +32,9 @@
 import {ErrMsg,Toast} from '../../utils/Msg';
 
 import axios from 'axios';
- import BScroll from 'better-scroll';
- import Header from '../../components/common/Header';
+import BScroll from 'better-scroll';
+import Header from '../../components/common/Header';
+import Http from  '../../utils/http';
 export default {
   name: 'Login',
   data () {
@@ -61,24 +62,29 @@ export default {
     },
 
 
-   login(){
+  async login(){
       
+      /*正则校验*/
       if(this.userName.length==0|| this.password.length==0){
            Toast({ErrMsg:'请输入用户名或密码',Duration:2000});
            return;
       }
+      
+     /**
+       * @description   用户登录请求
+       * @param {String}login  请求接口地址
+       * @param {Object} username   password  请求参数对象
+       *
+      */    
+      let responseData= await Http.post('login', {"username":this.userName,"password":this.password});
+      console.log(responseData);
+      if(responseData.status==0){
+        this.$store.commit('UpdateUserInfo',responseData.result);
+        this.$router.push({ name: 'Home'}) ; 
+      }else{
+          ErrMsg({ErrMsg:responseData.message,Duration:2000});
+      }
 
-
-       axios.post("/login",{"username":this.userName,"password":this.password}).then((res)=>{
-         console.log(res);
-            if(res.data.status==0){
-               this.$store.commit('UpdateUserInfo',res.data.result.memberAccount);
-               this.$router.push({ name: 'Home'}) ; 
-            }else{
-             ErrMsg({ErrMsg:res.data.message,Duration:2000});
-            }
-          
-          });
     }
   }
 }

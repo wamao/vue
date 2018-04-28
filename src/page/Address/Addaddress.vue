@@ -1,31 +1,36 @@
 <template>
   <div class="addaddress" >
-   <Header title="新增地址" ></Header>
+   <Header title="添加新地址" ></Header>
    <div class="addaddress_content">
      <p class="title">个人信息</p>
       <div class="edit_content bottom">
-        <span>收货人姓名:</span>
-        <input placeholder="请输入收货人姓名" v-model="ContactPerson"/>
+        <span>收货人姓名 : </span>
+        <input placeholder="请输入收货人姓名" v-model="ContactPerson"   />
       </div>
     
      <div class="edit_content">
-        <span>手机号码:</span>
-        <input placeholder="请输入手机号" v-model="ContactNumber"/>
+        <span>手机号码 : </span>
+        <input placeholder="请输入手机号" v-model="ContactNumber" />
       </div>
      </div>
     <div class="addaddress_content">
    <p class="title">收货地址</p>
    <div class="edit_content bottom" v-on:click="select">
-     <span >地区:</span>
+     <span >地区 : </span>
      <input v-model="ContactAddress" :readonly=true placeholder="省份 城市 县区"> 
     
    </div>
-    <div class="edit_content">
-     <span>详细地址:</span>
-     <input placeholder="请输入详细地址" v-model="ContactDetailAddress"/>
+    <div class="edit_content bottom">
+     <span>详细地址 : </span>
+     <input placeholder="请输入详细地址" v-model="ContactDetailAddress" />
+    </div>
+      <div v-on:click="setDefault"  class="setdefault">
+        <i v-if="isDefault" class="iconfont">&#xe60d;</i>
+        <i v-else class="iconfont"> &#xe629;</i>
+        <span>设为默认地址</span>
+      </div>
    </div>
-   </div>
-    <a href="javascript:;" class="btn_add"  v-on:click="add"> 确认</a>
+    <a v-if="showBtn" href="javascript:;" class="btn_add"  v-on:click="add"> 确认</a>
     
     <van-actionsheet v-model="show">
       <van-area :area-list="areaList" @cancel="cancel"  @confirm="confirm" title="选择地区"/>
@@ -35,12 +40,22 @@
 </template>
 
 <script>
+ var height=document.body.clientHeight;
+ window.addEventListener('resize', function() {
+     var bottom=document.getElementsByClassName("btn_add")[0];
+     var height1=document.body.clientHeight;
+      bottom.style.display=height1<height?'none':'block';
+  }, false);
+
+
+
+import axios from 'axios';
 import { Area,Toast} from 'vant';
 import AreaList from '../../assets/data/area';
 
 
 import Header from '../../components/common/Header';
-import axios from 'axios';
+import Http from '../../utils/http';
 export default {
   name: 'Cart',
    components: {
@@ -49,6 +64,8 @@ export default {
    },
   data () {
     return {
+      showBtn:true,  //显示底部确认按钮
+      isDefault:0,
       show:false,
       areaList:AreaList,
       ContactPerson:'', // 联系人
@@ -60,7 +77,7 @@ export default {
    
   methods:{
    
-    add(){
+ add(){
 
       if(this.ContactPerson.length==0){
           Toast('请输入联系人姓名');
@@ -84,16 +101,19 @@ export default {
       }
 
       let address={
-          token:"JhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiIwZmNlM2E1ZGExNDc5ZGIiLCJpYXQiOjE1MjQ4NDQ5MTcsImV4cCI6MTUyNDkzMTMxN30.X2A2L4Nm3OJAkn6Yp7edb5-3mi96IB_LqUAdUoZpHuI",
+          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4OTQ5MjYsImV4cCI6MTUyNDk4MTMyNn0.99kVryZIPiJO8aXzzoIP5x7oOclOcg0sPuv6aBLub-E",
+           isDefault:this.isDefault,
           ContactPerson:this.ContactPerson, // 联系人
           ContactNumber:this.ContactNumber, // 联系电话
           ContactAddress:this.ContactAddress, //地区
           ContactDetailAddress:this.ContactDetailAddress// 详细地址
       }
 
-      axios.post("/addAddress",address).then((res)=>{
+       axios.post("/addAddress",address).then((res)=>{
           console.log(res);
-        });
+          Toast('加入购物车成功');
+      });
+       
 
     },
     select(){
@@ -119,7 +139,14 @@ export default {
     },
     cancel(){
        this.show=false;
-    }
+    },
+    // 设置默认地址
+    setDefault(){
+     
+      this.isDefault=!this.isDefault;
+    },
+
+    
   }
 }
 </script>
@@ -189,6 +216,20 @@ export default {
      left:50%;
      transform: translateX(-50%);
      
+   }
+
+   .setdefault{
+     display:flex;
+     width:100%;
+     height:30px;
+     align-items:center;
+     i{
+       margin:0px 3px;
+     }
+     span{
+       color:#000000;
+       font-size:12px;
+     }
    }
   }
 </style>

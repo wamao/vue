@@ -21,15 +21,16 @@ const initUserInfo={
        // 获取用户信息
         UpdateUserInfo(state,userModel){
             // 先缓存用户信息在跟新state 
+            
             localStorage.setItem("userInfo",JSON.stringify(userModel));
-            state.userInfo=userModel;
+            state.userInfo=userModel.memberAccount;
         },
 
         // 更新用户信息
         getUserInfo(state){
             let userInfo= JSON.parse(localStorage.getItem('userInfo'));
             if(userInfo){
-                state.userInfo=userInfo;
+                state.userInfo=userInfo.memberAccount;
             }else{
                 state.userInfo=initUserInfo;
             }

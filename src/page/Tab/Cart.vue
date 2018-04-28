@@ -46,7 +46,7 @@ import Header from '../../components/common/Header';
 import Loading from '../../components/common/Loading';
 import { CellSwipe,Stepper ,Dialog } from 'vant';
 import Tab from './Tab';
-import axios from 'axios';
+import Http from '../../utils/http';
 export default {
   name: 'Cart',
   components:{
@@ -62,7 +62,7 @@ export default {
   },
 
   mounted(){
-        this.getCart(); // 获取购物车商品
+       // this.getCart(); // 获取购物车商品
   },
 
   computed:{
@@ -93,23 +93,30 @@ export default {
     setGoodsId(id){
         this.goodsId=id;
     },
-    getCart(){
+   async getCart(){
      
-      let req={
-        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4MDgzOTYsImV4cCI6MTUyNDg5NDc5Nn0.85nBqaz9r64E_iTBliF3C6V2YBuRYZlCMEnOFt3k5uA",
-       
-      }
-      axios.post("/getCart",req).then((res)=>{
-        let data=res.data.result.cartList;
+      /**
+       * @description  获取购物车商品
+       * @param {String} getCart  请求接口地址
+       * @param {Object} 不传参
+       *
+      */    
+     let responseData= await Http.post('getCart',{});
+      
+      if(responseData.status==0){
+        let data=responseData.result.cartList;
         this.finish=true; // 请求完成
          data.forEach(function(item){
-           //console.log(item);
            item.select=0;
            item.goodsImgArr=item.goodsImgArr.split(',')[0]
          });
          this.cartList=data;
+      }
 
-      });
+
+
+     
+     
     },
 
     // 单选

@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import qs from 'qs'
-const baseURL="http://192.168.100.41:3000/" ; //请求url地址
+const baseURL="http://192.168.100.52:3000/" ; //请求url地址
 axios.interceptors.request.use(config => {
   // loading
   return config
@@ -17,14 +17,14 @@ axios.interceptors.response.use(response => {
 })
 
 function checkStatus (response) {
-    console.log('----------------44444444---------------')
-    console.log(response);
-    console.log('----------------55555555555--------------')
+ 
   // loading
   // 如果http状态码正常，则直接返回数据
   if (response && (response.status === 200 || response.status === 304 || response.status === 400)) {
-    return response
-    // 如果不需要除了data之外的数据，可以直接 return response.data
+     // 如果不需要除了data之外的数据，可以直接 return response.data
+   
+    return response.data
+   
   }
   // 异常状态下，把错误信息返回去
   return {
@@ -34,14 +34,14 @@ function checkStatus (response) {
 }
 
 function checkCode (res) {
-    console.log('----------------1111111---------------')
+  
   // 如果code异常(这里已经包括网络错误，服务器错误，后端抛出的错误)，可以弹出一个错误提示，告诉用户
   if (res.status === -404) {
-    console.log('----------------222222222222---------------')
+  
     // alert(res.msg)
   }
   if (res.data && (!res.data.success)) {
-    console.log('----------------33333333333---------------')
+  
   //  alert(res.data.error_msg)
   }
   return res
@@ -49,11 +49,12 @@ function checkCode (res) {
 
 export default {
   post (url, data) {
+   
     return axios({
       method: 'post',
       baseURL: baseURL,
       url,
-      data: qs.stringify(data),
+      data: data,
       timeout: 10000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',

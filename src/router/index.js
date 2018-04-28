@@ -13,7 +13,9 @@ import GoodsDetail from  '../page/Goods/GoodsDetail'; //商品详情
 import Order from '../page/Order/Order'; // 订单页面
 import Coupon from  '../page/Mine/Coupon'; // 优惠券
 import Collection from  '../page/Mine/Collection' // 收藏
-import Addaddress from '../page/Address/Addaddress';
+import Addaddress from '../page/Address/Addaddress';  // 新增地址
+import EditAddress from '../page/Address/EditAddress'; // 修改地址
+import AddressList from  '../page/Address/AddressList'; // 地址列表页面
 Vue.use(Router);
 
 export default new Router({
@@ -77,7 +79,22 @@ export default new Router({
       path:'/Addaddress',
       name:'Addaddress',
       component:Addaddress
-    }
+    },
+
+    {
+      path:'/AddressList',
+      name:'AddressList',
+      component:AddressList
+    },
+
+    {
+      path:'/EditAddress',
+      name:'EditAddress',
+      component:EditAddress
+    },
+
+
+  
     
   ]
 })

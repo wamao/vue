@@ -1,41 +1,59 @@
 import axios from 'axios'
+import qs from 'qs'
+//import NProgress from 'nprogress'
 
+axios.interceptors.request.use(config => {
+   // NProgress.start()
+    return config
+}, error => {
+    return Promise.reject(error)
+})
 
-// axios 配置
-axios.defaults.timeout =10000;
-axios.defaults.baseURL = 'https://192.168.100.41:3000';
+axios.interceptors.response.use(response => response, error => Promise.resolve(error.response))
 
-// http request 拦截器
-// axios.interceptors.request.use(
-//     config => {
-//         if (store.state.token) {
-//             config.headers.Authorization = `token ${store.state.token}`;
-//         }
-//         return config;
-//     },
-//     err => {
-//         return Promise.reject(err);
-//     });
-
-// http response 拦截器
-axios.interceptors.response.use(
-    response => {
-        return response;
-    },
-    error => {
-        if (error.response) {
-            switch (error.response.status) {
-                case 401:
-                    // 401 清除token信息并跳转到登录页面
-                    store.commit(types.LOGOUT);
-                    router.replace({
-                        path: 'login',
-                        query: {redirect: router.currentRoute.fullPath}
-                    })
-            }
+function checkStatus(response) {
+ //   NProgress.done()
+    if (response.status === 200 || response.status === 304) {
+        return response
+    }
+    return {
+        data: {
+            code: -404,
+            message: response.statusText,
+            data: response.statusText,
         }
-        // console.log(JSON.stringify(error));//console : Error: Request failed with status code 402
-        return Promise.reject(error.response.data)
-    });
+    }
+}
 
-export default axios;
+function checkCode(res) {
+    if (res.data.code !== 200) {
+        alert(res.data.message)
+    }
+    return res
+}
+
+export default {
+    post(url, data) {
+        return axios({
+            method: 'post',
+            url,
+            data: qs.stringify(data),
+            timeout: 30000,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            }
+        }).then(checkStatus).then(checkCode)
+    },
+    get(url, params) {
+        return axios({
+            method: 'get',
+            url,
+            params,
+            timeout: 30000,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }).then(checkStatus).then(checkCode)
+    }
+}

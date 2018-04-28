@@ -45,6 +45,15 @@ module.exports = {
       '/addAddress':{
         target:'http://localhost:3000', // 设置代理目标
       },
+
+      '/getAddress':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+      '/editAddress':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+
+      
      
 
       

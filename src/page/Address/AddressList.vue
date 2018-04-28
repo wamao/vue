@@ -1,71 +1,66 @@
 <template>
-  <div class="mine" >
-     <div class="user">
-        <div class="user_content">
-             <img class="bg_img" src="../../assets/img/header.jpg" />
-             <div class="username">
-                <img class="header_img" src="../../assets/img/nvzhuang.jpg" />
-                 <p>xx,欢迎您 </p>
-             </div>
+  <div class="addresslist" >
+  <Header title="地址管理"></Header>
+    <div>
+    <ul>
+     <li v-for="item in addressList">
+        <div class="left">
+          <p> {{item.ContactPerson+item.ContactNumber}}</p>
+          <p> {{item.ContactAddress.replace(/\//g," ")}}</p>
         </div>
-     
-      
-     </div>
-     <div>
-      <ul>
-        <li v-on:click="pushPage(0)" >
-           <div>
-               <i class="iconfont"> &#xe618;</i>
-                <span>我的订单</span>
-               <i class="iconfont"> &#xe731;</i>
-           </div>
-        </li>
-         <li v-on:click="pushPage(1)" >
-           <div>
-               <i class="iconfont"  style="font-size:20px;" > &#xe7ce;</i>
-                <span>我的收藏</span>
-               <i class="iconfont"> &#xe731;</i>
-           </div>
-        </li>
-         <li v-on:click="pushPage(2)" >
-           <div>
-               <i class="iconfont"> &#xe715;</i>
-                <span>地址管理</span>
-               <i class="iconfont"> &#xe731;</i>
-           </div>
-        </li>
-        <li v-on:click="pushPage(3)" >
-           <div>
-               <i class="iconfont"> &#xe60e;</i>
-                <span>联系客服</span>
-               <i class="iconfont">  &#xe731;</i>
-           </div>
-        </li>
-      
-      
-      </ul>
-     
-     
-     </div>
+         <div class="right" v-on:click="edit(item)">
+           <i  class="iconfont"> &#xe69e;</i>
+          <span>编辑</span>
+        </div>
+     </li>
+    
+    </ul>
+    </div>
+       <a href="javascript:;" class="btn_add"  v-on:click="add">添加新收货地址</a>
+   
   </div>
 </template>
 
 <script>
- import BScroll from 'better-scroll'
+import BScroll from 'better-scroll';
+import Header from '../../components/common/Header';
+import axios from 'axios';
 export default {
-  name: 'Cart',
+  name: 'AddressList',
+  components:{
+ Header
+  },
   data () {
     return {
-     
+      addressList:[] // 地址列表
     }
   },
-   created(){
-   
+  mounted(){
+   this.getAddress(); // 获取用户地址
        
   },
   methods:{
-    pushPage(e){
-      alert(e)
+    /*获取地址列表*/
+    getAddress(){
+       let address={
+          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4OTQ5MjYsImV4cCI6MTUyNDk4MTMyNn0.99kVryZIPiJO8aXzzoIP5x7oOclOcg0sPuv6aBLub-E",
+         
+      }
+         axios.post("/getAddress",address).then((res)=>{
+
+          this.addressList=res.data.result.addressList
+          
+         
+      });
+    },
+    /*编辑地址*/  
+    edit(item){
+      this.$router.push({ name: 'EditAddress',params:item}) ; 
+    },
+
+    /*添加收货地址*/
+    add(){
+        this.$router.push({ name: 'Addaddress'}) ; 
     }
   }
 }
@@ -73,85 +68,70 @@ export default {
 
 
 <style lang="scss" scoped="" type="text/css">
-  .mine{
-    height:100%;
+  .addresslist{
+
     width:100%;
-    overflow:hidden;
-  .user{
-    margin-top:20px;
-    margin-bottom:40px;
-    display:flex;
-    align-items:center;
-    box-sizing:border-box;
-    justify-content:center;
-   .user_content{
-     position:relative;
-     width:92%;
-     .bg_img{
-       width:100%;
-       height:140px;
-       border-radius:10px;
-     }
-     .username{
-       position:absolute;
-       top:0px;
-       left:0px;
-       width:100%;
-       height:100%;
-       display:flex;
-       align-items:center;
-       img{
-         width:80px;
-         height:80px;
-         border-radius:40px;
-         margin:0px 15px 0px 20px;
-       }
-
-       p{color:#ffffff;font-weight:600;font-size:15px;}
-     }
-   }
-
-
-    p{
-      display:flex;
-      flex-direction:column;
-    }
-
-
-  }
-
+    height:100%;
+    background:#ffffff;
+    position:relative;
 
     ul{
       width:100%;
+      padding:0px 15px;
+      box-sizing:border-box;
       li{
         width:100%;
-        padding-left:15px;
+        margin-top:10px;
+        padding:10px;
         box-sizing:border-box;
-      
-        div{
-           display:flex;
-           border-bottom:1px solid #f5f5f5;
-           height:45px;
-           justify-content:center;
-           align-items:center;
-           padding-right:15px;
-           box-sizing:border-box;
+        border:1px solid #dadada;
+        display:flex;
+        align-items:center;
+        .right{
+          width:60px;
+          display:flex;
+          flex-direction:column;
+          justify-content:center;
+          align-items:center;
+          border-left:1px solid #dadada;
+          span{
+            font-size:13px;
+          }
 
-            i{
-             
-             display:block;
-              text-align:left;
-              font-size:24px;
-            }
+        }
 
-            span{
-              flex:1;
-              padding-left:10px;
-              box-sizing:border-box;
-              text-align:left;
-            }
+        .left{
+          flex:1;
+          p:nth-child(1){
+            font-size:13px;
+            color:#000000;
+            padding:5px 0px;
+          }
+           p:nth-child(2){
+            font-size:12px;
+            color:#999999;
+          }
         }
       }
     }
+     
+
+     .btn_add{
+     line-height:40px;
+     width:90%;
+     display: block;
+     color:#ffffff;
+     background: #000000;
+     font-weight: 600;
+     text-align: center;
+     letter-spacing: 5px;
+     position: fixed;
+     bottom:10px;
+     left:50%;
+     transform: translateX(-50%);
+     
+   }
+    
+    
   }
 </style>

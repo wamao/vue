@@ -69,9 +69,9 @@
 <script>
 import Tab from './Tab';
 import Header from '../../components/common/Header';
+import Http from  '../../utils/http';
 
-import axios from 'axios';
-import http from '../../utils/http';
+
 export default {
   name: 'Home',
    components: {
@@ -90,23 +90,20 @@ export default {
        
   },
   mounted(){
-    //this.fetchData();
-    this.getdata();
+    this.fetchData();
+  
   },
   methods:{
      fetchData:async function () {
-      const res = await http.get('goodsList',{pageSize:20,page:1,sort:1})
-        console.log(res);
-    },
-     getdata: function () {
-        var _this=this;
-          axios.post("/goodsList",{"pageSize": 150,"page": 1,categoryId:'183'}).then((res)=>{
-            console.log(res);
-            this.goodsList=res.data.result;
+      const responseData = await Http.post('goodsList',{pageSize:20,page:1,sort:1});
+         if(responseData.status==0){
+            this.goodsList=responseData.result;
             this.goodsList;
+         }
 
-          });
+       
     },
+    
 
     pushDetail(item){
        this.$router.push({ name: 'GoodsDetail', params: {goodsId: item.goodsId }})  ; 
