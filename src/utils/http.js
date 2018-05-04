@@ -49,12 +49,15 @@ function checkCode (res) {
 
 export default {
   post (url, data) {
-   
+    let userInfo=localStorage.getItem('userInfo');
+    let token=userInfo?JSON.parse(userInfo).token:'';
+         data.token=token;
+        
     return axios({
       method: 'post',
       baseURL: baseURL,
       url,
-      data: data,
+      data:data,
       timeout: 10000,
       headers: {
         'X-Requested-With': 'XMLHttpRequest',

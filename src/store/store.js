@@ -38,6 +38,7 @@ const initUserInfo={
          
         // 清除用户信息 
         clearUserInfo(state){
+            localStorage.removeItem("userInfo"); // 清除本地缓存
             state.userInfo=initUserInfo;  
         }
     },

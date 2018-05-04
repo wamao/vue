@@ -2,7 +2,7 @@
   <div class="coupon">
     <Header title="我的优惠券"></Header>
      
-    <div class="coupon_content" >    
+    <div class="coupon_content"  ref="couponWrapper">    
     <ul>
      <li v-for="item in couponList ">
        <div>
@@ -34,7 +34,7 @@ import Header from '../../components/common/Header';
 
 import { CellSwipe,Dialog, } from 'vant';
 
-import axios from 'axios';
+import Http from '../../utils/http';
 export default {
   name: 'Cart',
   components:{
@@ -56,29 +56,27 @@ created(){
  
 
   methods:{
-    getCouponList(){
-       axios.post("/couponList",{}).then((res)=>{
-         this.couponList=res.data.result.couponList;
-         console.log(this.couponList);
-          
-          });
-   
-    }
+  async  getCouponList(){
 
-   
-
-  
- 
-
+        let responseData=await Http.post('/couponList',{});
+         if(responseData.status==0){
+          this.couponList=responseData.result.couponList;
+         }
   }
+}
+
 }
 </script>
 
 
 <style lang="scss" scoped="" type="text/css">
 .coupon{
-.coupon_content{
+  display:flex;
   width:100%;
+  height:100%;
+.coupon_content{
+  flex:1;
+  overflow:hidden;
   padding:0px 15px;
   box-sizing:border-box;
   margin:10px 0px;

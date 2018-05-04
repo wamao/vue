@@ -17,15 +17,13 @@ body{ font-family: "microsoft yahei"; font-size:1.4rem;}
 
 
 
-
-
 @font-face {
   font-family: 'iconfont';  /* project id 630680 */
-  src: url('http://at.alicdn.com/t/font_630680_dtua0okw89yeqaor.eot');
-  src: url('http://at.alicdn.com/t/font_630680_dtua0okw89yeqaor.eot?#iefix') format('embedded-opentype'),
-  url('http://at.alicdn.com/t/font_630680_dtua0okw89yeqaor.woff') format('woff'),
-  url('http://at.alicdn.com/t/font_630680_dtua0okw89yeqaor.ttf') format('truetype'),
-  url('http://at.alicdn.com/t/font_630680_dtua0okw89yeqaor.svg#iconfont') format('svg');
+  src: url('http://at.alicdn.com/t/font_630680_7vkr79y7llv50zfr.eot');
+  src: url('http://at.alicdn.com/t/font_630680_7vkr79y7llv50zfr.eot?#iefix') format('embedded-opentype'),
+  url('http://at.alicdn.com/t/font_630680_7vkr79y7llv50zfr.woff') format('woff'),
+  url('http://at.alicdn.com/t/font_630680_7vkr79y7llv50zfr.ttf') format('truetype'),
+  url('http://at.alicdn.com/t/font_630680_7vkr79y7llv50zfr.svg#iconfont') format('svg');
 }
 
   .iconfont {

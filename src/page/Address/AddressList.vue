@@ -1,7 +1,12 @@
 <template>
   <div class="addresslist" >
   <Header title="地址管理"></Header>
-    <div>
+    <Loading v-if="!finish" ></Loading>
+    <div v-if="addressList.length==0&&finish"   class="address_no">
+       <i  class="iconfont">&#xe619;</i>
+        <p>您还未留下踪迹</p>
+    </div>
+    <div  ref="addressWrapper" class="addressList_content">
     <ul>
      <li v-for="item in addressList">
         <div class="left">
@@ -16,7 +21,9 @@
     
     </ul>
     </div>
-       <a href="javascript:;" class="btn_add"  v-on:click="add">添加新收货地址</a>
+      <div class="btn_add">
+         <a href="javascript:;"   v-on:click="add">添加新收货地址</a>
+      </div>
    
   </div>
 </template>
@@ -24,34 +31,41 @@
 <script>
 import BScroll from 'better-scroll';
 import Header from '../../components/common/Header';
-import axios from 'axios';
+import Loading from '../../components/common/Loading';
+import Http from '../../utils/http';
+
 export default {
   name: 'AddressList',
   components:{
- Header
+ Header,Loading
   },
   data () {
     return {
+      finish:false,
       addressList:[] // 地址列表
     }
+  },
+   created(){
+   
   },
   mounted(){
    this.getAddress(); // 获取用户地址
        
   },
   methods:{
+     //初始化better-scroll
+    _initScroll () {
+      this.addressScroll = new BScroll(this.$refs.addressWrapper, { click: true });
+    },
     /*获取地址列表*/
-    getAddress(){
-       let address={
-          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4OTQ5MjYsImV4cCI6MTUyNDk4MTMyNn0.99kVryZIPiJO8aXzzoIP5x7oOclOcg0sPuv6aBLub-E",
-         
-      }
-         axios.post("/getAddress",address).then((res)=>{
-
-          this.addressList=res.data.result.addressList
-          
-         
-      });
+   async getAddress(){
+        var responseData= await Http.post('/getAddress',{});
+        if(responseData.status==0){
+           this.finish=true;
+           this.addressList=responseData.result.addressList;
+             this.$nextTick(() => {  this._initScroll();  }); // 数据加载完成 初始化列表
+        }
+       
     },
     /*编辑地址*/  
     edit(item){
@@ -74,10 +88,17 @@ export default {
     height:100%;
     background:#ffffff;
     position:relative;
-
+    display:flex;
+    flex-direction:column;
+ .addressList_content{
+    flex:1;
+  
+    overflow:hidden;
+ }
     ul{
       width:100%;
       padding:0px 15px;
+      padding-bottom:70px;
       box-sizing:border-box;
       li{
         width:100%;
@@ -95,7 +116,7 @@ export default {
           align-items:center;
           border-left:1px solid #dadada;
           span{
-            font-size:13px;
+            font-size:12px;
           }
 
         }
@@ -117,19 +138,45 @@ export default {
      
 
      .btn_add{
-     line-height:40px;
-     width:90%;
-     display: block;
-     color:#ffffff;
-     background: #000000;
-     font-weight: 600;
-     text-align: center;
-     letter-spacing: 5px;
-     position: fixed;
-     bottom:10px;
-     left:50%;
-     transform: translateX(-50%);
      
+     width:100%;
+     display: flex;
+     color:#ffffff;
+     background: #ffffff;
+     height:60px;
+     text-align: center;
+   
+     position: fixed;
+     bottom:0px;
+     left:0px;
+     justify-content:center;
+     align-items:center;
+     a{
+         letter-spacing: 5px;
+      line-height:40px;
+       display:block;
+       width:90%;
+       background:#000000;
+       color:#ffffff;
+        font-weight: 500;
+     }
+   
+     
+   }
+
+   .address_no{
+     width:100%;
+     height:50%;
+     display:flex;
+     justify-content:center;
+     align-items:center;
+     flex-direction:column;
+   
+     i{
+      
+       font-size:50px;
+       margin-bottom:10px;
+     }
    }
     
     

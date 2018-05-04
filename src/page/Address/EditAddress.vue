@@ -48,12 +48,8 @@
   }, false);
 
 
-
-import axios from 'axios';
 import { Area,Toast} from 'vant';
 import AreaList from '../../assets/data/area';
-
-
 import Header from '../../components/common/Header';
 import Http from '../../utils/http';
 export default {
@@ -84,7 +80,7 @@ export default {
    
   methods:{
    
- add(){
+ async add(){
 
       if(this.ContactPerson.length==0){
           Toast('请输入联系人姓名');
@@ -107,20 +103,21 @@ export default {
           return;
       }
 
-      let address={
-          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4OTQ5MjYsImV4cCI6MTUyNDk4MTMyNn0.99kVryZIPiJO8aXzzoIP5x7oOclOcg0sPuv6aBLub-E",
-           isDefault:this.isDefault,
-          ContactPerson:this.ContactPerson, // 联系人
-          ContactNumber:this.ContactNumber, // 联系电话
+     
+
+      let addressParam={
+          isDefault:this.isDefault,           // 是否设置为默认地址
+          ContactPerson:this.ContactPerson,   // 联系人
+          ContactNumber:this.ContactNumber,   // 联系电话
           ContactAddress:this.ContactAddress, //地区
           ContactDetailAddress:this.ContactDetailAddress// 详细地址
       }
 
-       axios.post("/editAddress",address).then((res)=>{
-          console.log(res);
-          Toast('加入购物车成功');
-      });
-       
+         var responseData=await Http.post('/editAddress',addressParam);
+         if(responseData.status==0){
+             Toast('修改地址成功');
+             this.$router.go(-1);
+         }
 
     },
     select(){
@@ -154,8 +151,6 @@ export default {
 
     //获取地址参数
     getDetail(){
-
-      console.log(this.$route.params)
       this.isisDefault=this.$route.params.isDefault; // 是否为默认地址
       this.AddressId=this.$route.params.AddressId;  // addressId  
       this.ContactPerson=this.$route.params.ContactPerson ;// 联系人

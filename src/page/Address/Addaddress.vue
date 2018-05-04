@@ -52,8 +52,6 @@
 import axios from 'axios';
 import { Area,Toast} from 'vant';
 import AreaList from '../../assets/data/area';
-
-
 import Header from '../../components/common/Header';
 import Http from '../../utils/http';
 export default {
@@ -77,7 +75,7 @@ export default {
    
   methods:{
    
- add(){
+  async add(){
 
       if(this.ContactPerson.length==0){
           Toast('请输入联系人姓名');
@@ -100,19 +98,21 @@ export default {
           return;
       }
 
-      let address={
-          token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4OTQ5MjYsImV4cCI6MTUyNDk4MTMyNn0.99kVryZIPiJO8aXzzoIP5x7oOclOcg0sPuv6aBLub-E",
-           isDefault:this.isDefault,
+      let addressParam={
+          isDefault:this.isDefault,
           ContactPerson:this.ContactPerson, // 联系人
           ContactNumber:this.ContactNumber, // 联系电话
           ContactAddress:this.ContactAddress, //地区
           ContactDetailAddress:this.ContactDetailAddress// 详细地址
       }
 
-       axios.post("/addAddress",address).then((res)=>{
-          console.log(res);
-          Toast('加入购物车成功');
-      });
+      let responseData=await Http.post('/addAddress',addressParam);
+          if(responseData.status==0){
+             Toast('添加新地址成功');
+             this.$router.go(-1);
+          }
+
+       
        
 
     },
@@ -142,7 +142,6 @@ export default {
     },
     // 设置默认地址
     setDefault(){
-     
       this.isDefault=!this.isDefault;
     },
 

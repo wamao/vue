@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import Http from  '../../utils/http';
 import { Toast } from 'vant';
 import Header from  '../../components/common/Header';
 export default {
@@ -50,30 +50,31 @@ name: 'Detail',
   methods:{
 
     /*获取商品详情*/
-    getDetail: function () {
+  async  getDetail() {
          let goodsId=this.$route.params.goodsId;
-       
-          axios.post("/goodsDetail",{"goodsId":goodsId}).then((res)=>{
-              res.data.result.goodsDetail.goodsImgArr=res.data.result.goodsDetail.goodsImgArr.split(',');
-              this.goodsDetail=res.data.result.goodsDetail;
+         let responseData= await Http.post('/goodsDetail',{"goodsId":goodsId});
+         if(responseData.status==0){
+            responseData.result.goodsDetail.goodsImgArr=responseData.result.goodsDetail.goodsImgArr.split(',');
+            this.goodsDetail=responseData.result.goodsDetail;
             Toast.clear();
-
-          });
+         }
     },
     
     /*加入购物车*/
-    addCart(){
-      let req={
-        token:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJmMjcwY2FkZGFhMjJkYjciLCJpYXQiOjE1MjQ4MDgzOTYsImV4cCI6MTUyNDg5NDc5Nn0.85nBqaz9r64E_iTBliF3C6V2YBuRYZlCMEnOFt3k5uA",
+   async addCart(){
+
+      let goodsParam={
         goodsId:this.$route.params.goodsId,
         goodsNumber:1,
         goodsSize:'2018纪念版',
         goodsColor:"经典蓝"
       }
-      axios.post("/addCart",req).then((res)=>{
-          console.log(res);
-          Toast('加入购物车成功');
-      });
+
+
+       let responseData= await Http.post('/addCart',goodsParam);
+         if(responseData.status==0){
+            Toast('加入购物车成功');
+         }
     }
   }
 }
@@ -176,23 +177,26 @@ name: 'Detail',
     display:flex;
     p:nth-child(1){
       width:100px;
+      text-align:center;
       i{padding:0px 3px;}
     }
     p:nth-child(2){
       flex:1;
       background:#333333;
       color:#ffffff;
-      font-size:16px;
-      font-weight:600;
+      font-size:12px;
       line-height:50px;
+      text-align:center;
+       letter-spacing:2px;
     }
 
     p:nth-child(3){
       flex:1;
       background:#000000;
       color:#ffffff;
-      font-size:16px;
-      font-weight:600;
+      text-align:center;
+       letter-spacing:2px;
+      font-size:12px;
       line-height:50px;
     }
   }
