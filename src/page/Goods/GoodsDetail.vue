@@ -36,6 +36,7 @@ name: 'Detail',
  },
   data () {
     return {
+      
       goodsDetail:{} // 商品详情
     }
   },
@@ -62,6 +63,7 @@ name: 'Detail',
     
     /*加入购物车*/
    async addCart(){
+  
 
       let goodsParam={
         goodsId:this.$route.params.goodsId,
@@ -72,8 +74,11 @@ name: 'Detail',
 
 
        let responseData= await Http.post('/addCart',goodsParam);
+       console.log(responseData);
          if(responseData.status==0){
             Toast('加入购物车成功');
+         }else{
+            Toast(responseData.message);
          }
     }
   }

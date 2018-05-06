@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <router-view/> 
+
+    <router-view ></router-view>
+
+
    
    
   </div>
@@ -28,6 +31,7 @@ export default {
 @import "./style/global.css";
 #app {
   height:100%;
+  
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

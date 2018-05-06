@@ -20,14 +20,14 @@
                <i class="iconfont"> &#xe731;</i>
            </div>
        </router-link>
-         <li v-on:click="pushPage(1)" >
+         <router-link tag="li" to="/AddCoupon">
            <div>
                <i class="iconfont"  style="font-size:20px;" > &#xe7ce;</i>
                 <span>我的收藏</span>
                <i class="iconfont"> &#xe731;</i>
            </div>
-        </li>
-       <router-link tag="li" to="/Coupon">
+        </router-link>
+       <router-link tag="li" to="/MyCoupon">
            <div>
               <i class="iconfont"> &#xe624;</i>
                 <span>我的优惠券</span>

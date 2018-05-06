@@ -1,33 +1,26 @@
 <template>
   <div class="tab_Container">
   <ul> 
-
-    <li  :class="Index==1?'active':''"  v-on:click="pushPage(1)">
+    
+    <router-link tag="li"  exact  :to="{path: '/'}">
         <i class="iconfont"> &#xe6b8;</i>
         <span>首页</span>
       
-    </li>
-    <li :class="Index==2?'active':''" v-on:click="pushPage(2)"  >
+    </router-link>
+     <router-link tag="li"   :to="{path: '/Category'}">
         <i class="iconfont"> &#xe699;</i>
             <span>分类</span>
       
-      </li>
-    <li :class="Index==3?'active':''" v-on:click="pushPage(3)" >
+    </router-link>
+     <router-link tag="li"   :to="{path: '/Cart'}">
         <i class="iconfont"> &#xe698;</i>
           <span>购物车</span>
       
-      </li>
-    <li :class="Index==4?'active':''"  v-on:click="pushPage(4)"  >
+     </router-link>
+     <router-link tag="li"  :to="{path: '/Mine'}">
          <i class="iconfont"> &#xe78b;</i>
           <span>我的</span>
-      </li>
-      
-         
-    
-    
-
-  
-   
+    </router-link>
   </ul> 
   </div>
 </template>
@@ -44,34 +37,7 @@ export default {
   },
 
   methods:{
-  pushPage(e){
-     
-     let userName=this.$store.state.userInfo.userName;
-
-      if(e==3||e==4){
-        if(userName.length==0){
-          this.$router.push({ name: 'Login'}) ;   // 命名的路由
-          return;
-        }
-      }
-   
-     
-      switch(e){
-        case 1:
-         this.$router.push({ name: 'Home'}) ;   // 命名的路由
-         break;
-         case 2:
-          this.$router.push({ name: 'Category'}) ;   // 命名的路由
-         break;
-           case 3:
-
-          this.$router.push({ name: 'Cart'}) ;   // 命名的路由
-         break;
-           case 4:
-          this.$router.push({ name: 'Mine'}) ;   // 命名的路由
-         break;
-      }
-  }
+ 
   }
 }
 </script>

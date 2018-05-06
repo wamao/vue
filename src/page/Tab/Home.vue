@@ -8,8 +8,7 @@
        <span>搜索商品,共488377款好物</span>
       </div>
       <wc-swiper class="home_swiper" >
-        <wc-slide><img src="../../assets/img/imgcover01.png"/></wc-slide>
-        <wc-slide><img src="../../assets/img/imgcover02.png"/></wc-slide>
+       
          <wc-slide><img src="../../assets/img/imgcover03.png"/></wc-slide>
         <wc-slide><img src="../../assets/img/imgcover04.png"/></wc-slide>
          <wc-slide><img src="../../assets/img/imgcover05.png"/></wc-slide>
@@ -25,7 +24,7 @@
    </div>
    
    <div class="juan_content">
-      <div class="juan">
+      <div class="juan" v-on:click="pushCounponList">
          <p>- 领券中心 -</p>
          <dl>
            <dt><img src="../../assets/img/juan1.jpg"/></dt>
@@ -37,14 +36,30 @@
       </div>
       <div class="zhekou">
         <p>- 今日折扣 -</p>
-        <img src="../../assets/img/zhekou6.jpg"/>
+        <img src="../../assets/img/zhekou7.jpg"/>
       </div>
    </div>
     <div class="time">
+      <div class="time_left">
+        <p>良品限时购</p>
+        <div>
+          <span>08</span>
+          <label>:</label>
+          <span>00</span>
+           <label>:</label>
+          <span>00</span>
+        </div>
+        <p class="next_time">下一场00:00开始</p>
+      </div>
      
-      <img src="../../assets/img/zhekou6.jpg"/>
-      <div class="">
-
+  
+      <div class="time_right">
+            <img src="../../assets/img/time1.jpg"/>
+            <dl>
+              <dt>5.8</dt>
+              <dd>折起</dd>
+            </dl>
+          
       </div>
    </div>
   <div class="home_list" >
@@ -81,33 +96,47 @@ export default {
   data () {
     return {
       goodsList:[],
-     
-      msg: 'Welcome to Your Vue.js App'
+  
     }
   },
   created(){
-   
+  
        
   },
   mounted(){
     this.fetchData();
   
   },
+
+  computed:{
+   
+},
+  
   methods:{
+
+   
+
+    //数据请求
      fetchData:async function () {
-      const responseData = await Http.post('goodsList',{pageSize:20,page:1,sort:1});
+      const responseData = await Http.post('goodsList',{ThirdCategoryId:"maoyi",pageSize:50,page:1,sort:1});
          if(responseData.status==0){
-            this.goodsList=responseData.result;
+            this.goodsList=responseData.result.categoryList;
             this.goodsList;
          }
 
        
     },
     
-
+   // 详情
     pushDetail(item){
        this.$router.push({ name: 'GoodsDetail', params: {goodsId: item.goodsId }})  ; 
-    }
+    },
+
+    // 倒计时
+     
+    pushCounponList(item){
+       this.$router.push({ name:'CouponList'})  ; 
+    },
   }
 
   
@@ -117,14 +146,21 @@ export default {
 
 <style lang="scss" scoped="" type="text/css">
 .home{
-  height:100%;
+  
   width:100%;
+  background: #f5f5f5;
  .header_title{
    font-size: 16px;
    letter-spacing: 1px;
    color: #000000;
+   padding:15px 0px;
    background: #ffffff;
  }
+
+ .ad{
+   background: #ffffff;
+   margin:5px 0px;
+   }
 
   .search{position: relative;}
   .search_content{
@@ -156,6 +192,7 @@ export default {
     width:100%;
     background:#f5f5f5;
     padding-bottom:40px; 
+    text-align:center;
     p.title{
       padding-top:15px ;
       padding-bottom: 40px;
@@ -181,6 +218,7 @@ export default {
           width:100%;
           img{
              width:100%;
+             height: 100%;
             
            }
         }
@@ -223,9 +261,14 @@ export default {
  }
  .juan_content{
    display: flex;
+   background:#ffffff;
+   padding:10px 15px;
+   box-sizing: border-box;
+   margin-bottom: 10px;
    .zhekou{
      width:120px;
-     background: #dfe2e2;
+     background: #e0e2df;
+     text-align: center;
      margin-left: 5px;
      p{font-size: 12px;padding:5px 0px;}
      img{
@@ -238,6 +281,8 @@ export default {
      display: flex;
      background: #f5f5f5;
      flex-direction: column;
+     justify-content: center;
+     align-items: center;
      p{font-size: 12px;padding:5px 0px;}
      dl{
       
@@ -257,6 +302,87 @@ export default {
        }
      }
    }
+
+   
  }
+ .time{
+     background:#ffffff;
+     width: 100%;
+     display: flex;
+     justify-content: space-between;
+     padding:20px 20px;
+     box-sizing:border-box;
+     margin-bottom: 10px;
+     .time_left{
+       flex:1;
+      
+       display: flex;
+       justify-content: center;
+       align-items:flex-start;
+       flex-direction: column;
+      p:nth-child(1){
+        font-size: 14px;
+        color:#000000;
+      }
+      div{
+        padding:8px 0px;
+        display: flex;
+        
+        span{
+          background:#000000;
+          line-height:30px;
+          text-align: center;
+          width:30px;
+          color:#ffffff;
+          font-weight: 700;
+          font-size: 15px;
+        }
+
+        label{
+          display: block;
+          line-height: 30px;
+          padding:0px 3px;
+          font-weight: 500;
+          font-size:25px;
+        }
+      }
+       .next_time{
+         font-size: 12px;
+         color:#333333;
+
+       }
+      
+     }
+     .time_right{
+       position: relative;
+       img{
+         width:80px;
+       }
+
+       dl{
+         display:flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         width:50px;
+         height:50px;
+         background: #999999;
+         color:#ffffff;
+         position: absolute;
+         right:0px;
+         bottom:0px;
+         text-align: center;
+         border-radius: 25px;
+         overflow: hidden;
+         dt{
+           font-size: 14px;
+           font-weight: 600;
+         }
+         dd{
+           font-size: 12px;
+         }
+       }
+     }
+   }
  }
 </style>

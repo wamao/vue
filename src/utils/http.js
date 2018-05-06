@@ -2,7 +2,7 @@
 
 import axios from 'axios'
 import qs from 'qs'
-const baseURL="http://192.168.100.52:3000/" ; //请求url地址
+const baseURL="http://192.168.1.106:3000/" ; //请求url地址
 axios.interceptors.request.use(config => {
   // loading
   return config

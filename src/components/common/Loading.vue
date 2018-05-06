@@ -24,6 +24,7 @@ export default {
     display:flex;
     justify-content:center;
     align-items:center;
+    background: #f5f5f5;
     img{margin-right:15px;
       -moz-transition-duration: 1s;
       -webkit-animation: rotate 1s linear infinite;

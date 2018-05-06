@@ -1,5 +1,5 @@
 <template>
-  <div class="login" >
+  <div class="register" >
        <Header title="注册" ></Header>
        <img src="../../assets/img/logo.png"/>
         <h6>鹿先森</h6>
@@ -9,7 +9,7 @@
            <input class="user_input" v-model="confirmPwd"   placeholder="请再次输入密码" type="password" /> 
         </div>
          <div class="btn_content">
-            <a href="javascript:void(0);" class="reg_btn"  v-on:click="register()">去注册</a> 
+            <a href="javascript:void(0);" class="reg_btn"  v-on:click="register()">注册</a> 
          </div>
      </div>
 </template>
@@ -94,7 +94,8 @@ export default {
 
 
 
-  .login{
+  .register{
+    text-align: center;
      width:100%;
      height:100%;
     img{

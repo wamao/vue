@@ -80,7 +80,7 @@ export default {
       console.log(responseData);
       if(responseData.status==0){
         this.$store.commit('UpdateUserInfo',responseData.result);
-        this.$router.push({ name: 'Home'}) ; 
+        this.$router.go(-1);
       }else{
           ErrMsg({ErrMsg:responseData.message,Duration:2000});
       }
@@ -100,6 +100,7 @@ export default {
   .login{
      width:100%;
      height:100%;
+     text-align: center;
     img{
       width:60px;
       height:60px;

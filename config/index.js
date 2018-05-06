@@ -39,6 +39,17 @@ module.exports = {
       '/addCoupon':{
         target:'http://localhost:3000', // 设置代理目标
       },
+      '/drawCoupon':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+
+      '/getCoupon':{
+        target:'http://localhost:3000', // 设置代理目标
+      },
+
+      
+
+      
       '/couponList':{
         target:'http://localhost:3000', // 设置代理目标
       },

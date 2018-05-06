@@ -2,7 +2,7 @@
   <div class="category">
  
     <div ref="navWrapper" class="left_nav">
-       <ul   >
+       <ul>
            <li v-for="(item,index) in navData" :class="activeIndex==index?'active':''"  @click="clickActive(index)"  >{{item.title}}</li>
        </ul>
     </div>
@@ -13,8 +13,9 @@
               <div v-for="item in itemlist.children">
                   <p class="list_title">{{item.title}}</p>
                     <ul class="item_list">
-                      <li v-for="items in item.children" v-on:click="Category(item)"  >
-                          <img src="../../assets/img/nvzhuang.png" style="width:40px;height:45px;"  />
+                      <li v-for="items in item.children" v-on:click="Category(items)"  >
+                         <img v-if="items.iconUrl" :src="items.iconUrl" style="width:40px;height:45px;"  />
+                          <img v-else src="../../assets/img/nvzhuang.png" style="width:40px;height:45px;"  />
                           <span> {{items.title}}</span>
                       </li>
                     </ul>
@@ -136,9 +137,8 @@ export default {
           return ;
         },
 
-        Category(itemList){
-              
-               this.$router.push({ name: 'Secondary', params: {category: itemList }})   
+        Category(item){
+          this.$router.push({ name: 'Secondary', params: {title: item.title,categoryId:item.categoryId}}) ;  
         }
 
 
